@@ -1,0 +1,84 @@
+<div class="container mt-2">
+  <form action="/update/confirm/{{restaurant._id}}" method="POST">
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="name">中文名稱</label>
+        <input type="text" class="form-control" name="name" value="{{restaurant.name}}" id="name" placeholder="中文名稱"
+          required>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="name_en">英文名稱</label>
+        <input type="text" class="form-control" name="name_en" value="{{restaurant.name_en}}" id="name_en"
+          placeholder="英文名稱">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="name_en">分類</label>
+        <input type="text" class="form-control" name="category" value="{{restaurant.category}}" id="category"
+          placeholder="分類">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="image">圖片連結</label>
+      <input type="text" class="form-control" name="image" value="{{restaurant.image}}" id="image" placeholder="圖片連結">
+    </div>
+    <div class="form-group">
+      <label for="location">地址</label>
+      <input type="text" class="form-control" name="location" value="{{restaurant.location}}" id="location"
+        placeholder="地址">
+    </div>
+    <div class="form-group">
+      <label for="description">餐廳描述</label>
+      <input type="text" class="form-control" name="description" value="{{restaurant.description}}" id="description"
+        placeholder="餐廳描述">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="phone">電話</label>
+        <input type="text" class="form-control" name="phone" value="{{restaurant.phone}}" id="phone" placeholder="電話">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="google_map">goole地圖連結</label>
+        <input type="text" class="form-control" name="google_map" value="{{restaurant.google_map}}" id="google_map"
+          placeholder="goole地圖連結">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="rating">評分</label>
+        <select name="rating" value="{{restaurant.rating}}" id="rating" class="form-control">
+          <option {{#ifEqual restaurant.rating '1'}} selected {{/ifEqual}}>1</option>
+          <option {{#ifEqual restaurant.rating '2'}} selected {{/ifEqual}}>2</option>
+          <option {{#ifEqual restaurant.rating '3'}} selected {{/ifEqual}}>3</option>
+          <option {{#ifEqual restaurant.rating '4'}} selected {{/ifEqual}}>4</option>
+          <option {{#ifEqual restaurant.rating '5'}} selected {{/ifEqual}}>5</option>
+        </select>
+        <p class="blockquote-footer">評價越好分數越高</p>
+      </div>
+    </div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-outline-info btn-lg" data-toggle="modal"
+      data-target="#exampleModalCenter">送出修改餐廳資料</button>
+    <a href="/" class="btn btn-outline-info btn-lg">返回主頁</a>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">修改已完成</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {{!-- <div class="modal-body">
+            ...
+          </div> --}}
+          <div class="modal-footer">
+            <button type="submit"" class=" btn btn-outline-info btn-lg" data-dismiss="modal">確定</button>
+            {{!-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
