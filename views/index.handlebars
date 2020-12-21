@@ -22,7 +22,13 @@
 
         <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Sort&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+          &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+          {{#if sortByName}}
+          {{sortByName}}
+          {{else}}
+          Sort
+          {{/if}}
+          &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="/sort/name/asc">A → Z</a>

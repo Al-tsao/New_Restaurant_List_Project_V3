@@ -129,13 +129,24 @@ app.post('/update/confirm/:id', (req, res) => {
 app.get('/sort/:sortBy/:sortOrder', (req, res) => {
   const sortBy = req.params.sortBy
   const sortOrder = req.params.sortOrder
+  var sortByName = ""
+  if (sortBy === "name" && sortOrder === "asc") {
+    sortByName = "A → Z"
+  } else if (sortBy === "name" && sortOrder === "desc") {
+    sortByName = "Z → A"
+  } else if (sortBy === "category") {
+    sortByName = "類別"
+  } else if (sortBy === "location") {
+    sortByName = "地區"
+  }
+  console.log(sortByName)
   console.log(sortBy)
   console.log(sortOrder)
   listGenerated.find()
     .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
     .sort({ sortBy: sortOrder })
     .then(rList /* rList是清理過後的陣列 */ => {
-      res.render('index', { restaurants: rList })
+      res.render('index', { restaurants: rList, sortByName: sortByName })
     }) // 將資料傳給 index 樣板
     .catch(error => console.error(error)) // 錯誤處理
 })
