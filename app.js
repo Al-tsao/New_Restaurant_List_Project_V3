@@ -125,6 +125,18 @@ app.post('/update/confirm/:id', (req, res) => {
     .then(() => res.redirect(`/update/${id}`))
     .catch((error) => console.log(error))
 })
+// 排序頁面
+app.get('/sort/:sortBy/:sortOrder', (req, res) => {
+  const sortBy = req.params.sortBy
+  const sortOrder = req.params.sortOrder
+  listGenerated.find()
+    .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
+    .sort({ [sortBy]: [sortOrder] })
+    .then(rList /* rList是清理過後的陣列 */ => {
+      res.render('index', { restaurants: rList })
+    }) // 將資料傳給 index 樣板
+    .catch(error => console.error(error)) // 錯誤處理
+})
 // =========== routes setting End ===========
 
 // start and listen on the Express server

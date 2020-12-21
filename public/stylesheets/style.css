@@ -105,3 +105,17 @@ header {
   max-width: 680px;
   margin: 1em auto;
 }
+/* .btn-outline-secondary:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #666666;
+} */
+.btn-outline-secondary:hover, 
+.btn-outline-secondary:active, 
+.btn-outline-secondary:visited,
+.btn-outline-secondary:focus,
+.btn-outline-secondary:focus-within,
+.btn-outline-secondary:focus-visible,
+.show>.btn-outline-secondary.dropdown-toggle {
+  color: #6c757d !important;
+  background-color: #ffffff !important;
+}

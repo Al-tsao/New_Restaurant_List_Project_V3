@@ -1,18 +1,35 @@
 <!-- search bar -->
 <div class="container search-bar">
-  <div class="row">
-    <div class="search-bar-outer col-12">
-      <div class="search-bar-inner">
-        <form action="/search">
-          <h4 class="mb-2">尋找餐廳：</h4>
-          <div class="input-group">
-            <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
-              value="{{keyword}}" aria-describedby="search-button">
-            <div class="input-group-append">
-              <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
-            </div>
+  <div class="row mt-3 justify-content-center">
+    <div class="col-10">
+      {{!-- <div class="search-bar-outer col-12"> --}}
+        <div class="row justify-content-between">
+          <div class="search-bar-inner">
+            <form action="/search">
+              {{!-- <h4 class="mb-2">尋找餐廳：</h4> --}}
+              <div class="input-group">
+                <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類"
+                  aria-label="Restaurant Name..." value="{{keyword}}" aria-describedby="search-button">
+                <div class="input-group-append">
+                  <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+                </div>
+              </div>
+            </form>
           </div>
-        </form>
+
+          {{!--
+        </div> --}}
+
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Sort&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="/sort/name/asc">A → Z</a>
+          <a class="dropdown-item" href="/sort/name/desc">Z → A</a>
+          <a class="dropdown-item" href="/sort/category/asc">類別</a>
+          <a class="dropdown-item" href="/sort/location/asc">地區</a>
+        </div>
       </div>
     </div>
   </div>
