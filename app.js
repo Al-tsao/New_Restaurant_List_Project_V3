@@ -129,9 +129,11 @@ app.post('/update/confirm/:id', (req, res) => {
 app.get('/sort/:sortBy/:sortOrder', (req, res) => {
   const sortBy = req.params.sortBy
   const sortOrder = req.params.sortOrder
+  console.log(sortBy)
+  console.log(sortOrder)
   listGenerated.find()
     .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
-    .sort({ [sortBy]: [sortOrder] })
+    .sort({ sortBy: sortOrder })
     .then(rList /* rList是清理過後的陣列 */ => {
       res.render('index', { restaurants: rList })
     }) // 將資料傳給 index 樣板
