@@ -10,6 +10,9 @@ const listGenerated = require('./models/restaurantList.js') // 載入 restaurant
 // require express-handlebars here
 const exphbs = require('express-handlebars')
 
+// 載入 method-override
+const methodOverride = require('method-override')
+
 // 載入同層的JS檔
 // const gTrashTalk = require('./generate_trashTalk.js')
 
@@ -25,6 +28,8 @@ app.set('view engine', 'handlebars')
 
 // setting static files 設定 Express 路由以提供靜態檔案(就是讓CSS或者是JS可以使用)
 app.use(express.static('public'))
+// 設定每一筆請求都會透過 methodOverride 進行前置處理
+app.use(methodOverride('_method'))
 
 // setting body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
