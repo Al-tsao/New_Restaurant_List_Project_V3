@@ -1,6 +1,6 @@
-# New_Restaurant_List_Project_V2
+# New_Restaurant_List_Project_V3
 
-提供使用者新增、刪除及修改餐廳的資訊，例如:餐廳類別、地址、評分、描述...等
+重構router和mongoose
 
 ## Features - 產品功能
 
@@ -34,13 +34,13 @@
 1. 開啟終端機(Terminal) 或 (Git Bash) 到欲存放專案的本機位置並執行:
 
 ```
-git https://github.com/Al-tsao/New_Restaurant_List_Project_V2.git
+git https://github.com/Al-tsao/New_Restaurant_List_Project_V3.git
 ```
 
 2. 開啟終端機(Terminal) 或 (Git Bash)，進入到存放此專案的資料夾
 
 ```
-cd New_Restaurant_List_Project_V2-master
+cd New_Restaurant_List_Project_V3-master
 ```
 
 3. 安裝 npm 套件
