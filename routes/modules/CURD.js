@@ -40,7 +40,7 @@ router.post('/create/new', (req, res) => {
     .catch(error => console.log(error))
 })
 // 刪除餐廳資料
-router.get('/delete/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
   const id = req.params.id
   listGenerated.findById(id)
     .then(restaurant => restaurant.remove())
@@ -58,7 +58,7 @@ router.get('/update/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 // 送出update頁面資料到MongoDB(修改資料)
-router.post('/update/confirm/:id', (req, res) => {
+router.put('/update/confirm/:id', (req, res) => {
   //取得restaurant_id
   const id = req.params.id
   const options = req.body
@@ -68,7 +68,7 @@ router.post('/update/confirm/:id', (req, res) => {
       restaurant = Object.assign(restaurant, options)
       return restaurant.save()
     })
-    .then(() => res.redirect(`/update/${id}`))
+    .then(() => res.redirect('/'))
     .catch((error) => console.log(error))
 })
 // ===========路由模組結束===========

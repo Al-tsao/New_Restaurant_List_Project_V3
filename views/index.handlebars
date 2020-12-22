@@ -97,7 +97,10 @@
                         </div>
                         <div class="modal-footer">
                           <a href="/" class="btn btn-outline-info ml-2">返回</a>
-                          <a href="/delete/{{ this._id }}?_method=DELETE" class="btn btn-outline-danger ml-2">確認</a>
+                          <form action="/delete/{{ this._id }}?_method=DELETE" method="POST">
+                            <!--<a href="/delete/{{ this._id }}?_method=DELETE" class="btn btn-outline-danger ml-2">確認</a>-->
+                            <button type="submit" class="btn btn-outline-danger ml-2">確認</button>
+                          </form>
                         </div>
                       </div>
                     </div>

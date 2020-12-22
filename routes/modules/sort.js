@@ -19,9 +19,6 @@ router.get('/sort/:sortBy/:sortOrder', (req, res) => {
   } else if (sortBy === "location") {
     sortByName = "地區"
   }
-  console.log(sortByName)
-  console.log(sortBy)
-  console.log(sortOrder)
   listGenerated.find()
     .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
     .sort({ [sortBy]: sortOrder })
