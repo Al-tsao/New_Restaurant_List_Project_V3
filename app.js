@@ -3,8 +3,6 @@ const express = require('express')
 const app = express()
 const port = 3000
 const bodyParser = require('body-parser') //讓express可以用POST
-const mongoose = require('mongoose') // 載入 mongoose
-mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true }) // 設定連線到 mongoDB
 const listGenerated = require('./models/restaurantList.js') // 載入 restaurantList.js
 
 // require express-handlebars here
@@ -42,17 +40,21 @@ handlebars.registerHelper('ifEqual', function (job, targetJob, options) {
   return options.inverse(this)
 })
 
-// mongoDB資料連線
-// 取得資料庫連線狀態
-const db = mongoose.connection
-// 連線異常
-db.on('error', () => {
-  console.log('mongodb error!')
-})
-// 連線成功
-db.once('open', () => {
-  console.log('mongodb connected!')
-})
+// const mongoose = require('mongoose') // 載入 mongoose
+// mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true }) // 設定連線到 mongoDB
+// // mongoDB資料連線
+// // 取得資料庫連線狀態
+// const db = mongoose.connection
+// // 連線異常
+// db.on('error', () => {
+//   console.log('mongodb error!')
+// })
+// // 連線成功
+// db.once('open', () => {
+//   console.log('mongodb connected!')
+// })
+// 以上function分離至config中的mongoose，然後用require引入
+require('./config/mongoose')
 
 // =========== routes setting Start ===========
 // 引用路由器
