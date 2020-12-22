@@ -55,15 +55,24 @@ db.once('open', () => {
 })
 
 // =========== routes setting Start ===========
+// 引用路由器
+const routes = require('./routes')
+// 將 request 導入路由器
+app.use(routes)
+
+// =========== routes setting End ===========
+
+
+// =========== routes setting Start ===========
 // 進入index頁面
-app.get('/', (req, res) => {
-  listGenerated.find()
-    .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
-    .then(rList /* rList是清理過後的陣列 */ => {
-      res.render('index', { restaurants: rList })
-    }) // 將資料傳給 index 樣板
-    .catch(error => console.error(error)) // 錯誤處理
-})
+// app.get('/', (req, res) => {
+//   listGenerated.find()
+//     .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
+//     .then(rList /* rList是清理過後的陣列 */ => {
+//       res.render('index', { restaurants: rList })
+//     }) // 將資料傳給 index 樣板
+//     .catch(error => console.error(error)) // 錯誤處理
+// })
 // 進入read頁面
 app.get('/read/:id', (req, res) => {
   const id = req.params.id
