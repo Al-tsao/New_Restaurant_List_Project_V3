@@ -74,96 +74,96 @@ app.use(routes)
 //     .catch(error => console.error(error)) // 錯誤處理
 // })
 // 進入read頁面
-app.get('/read/:id', (req, res) => {
-  const id = req.params.id
-  listGenerated.findById(id)
-    .lean()
-    .then(rList => {
-      res.render('read', { restaurant: rList })
-    }) // 將資料傳給 index 樣板
-    .catch(error => console.error(error)) // 錯誤處理)
-})
+// app.get('/read/:id', (req, res) => {
+//   const id = req.params.id
+//   listGenerated.findById(id)
+//     .lean()
+//     .then(rList => {
+//       res.render('read', { restaurant: rList })
+//     }) // 將資料傳給 index 樣板
+//     .catch(error => console.error(error)) // 錯誤處理)
+// })
 //搜尋餐廳並將結果列表顯示 
-app.get('/search', (req, res) => {
-  const keyword = req.query.keyword
-  listGenerated.find()
-    .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
-    .then(rList /* rList是清理過後的陣列 */ => {
-      const restaurants = rList.filter(restaurant => {
-        return restaurant.name.toLowerCase().includes(keyword.toLowerCase()) || restaurant.category.toLowerCase().includes(keyword.toLowerCase())
-      })
-      res.render('index', { restaurants: restaurants, keyword: keyword })
-    }) // 將資料傳給 index 樣板
-    .catch(error => console.error(error)) // 錯誤處理
-})
+// app.get('/search', (req, res) => {
+//   const keyword = req.query.keyword
+//   listGenerated.find()
+//     .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
+//     .then(rList /* rList是清理過後的陣列 */ => {
+//       const restaurants = rList.filter(restaurant => {
+//         return restaurant.name.toLowerCase().includes(keyword.toLowerCase()) || restaurant.category.toLowerCase().includes(keyword.toLowerCase())
+//       })
+//       res.render('index', { restaurants: restaurants, keyword: keyword })
+//     }) // 將資料傳給 index 樣板
+//     .catch(error => console.error(error)) // 錯誤處理
+// })
 // 進入create頁面
-app.get('/create', (req, res) => {
-  res.render('create')
-})
+// app.get('/create', (req, res) => {
+//   res.render('create')
+// })
 // 送出create頁面資料到MongoDB(新增資料)
-app.post('/create/new', (req, res) => {
-  const newRestaurenat = req.body       // 從 req.body 拿出表單裡的 name 資料
-  return listGenerated.create(newRestaurenat)     // 存入資料庫，create(這裡面的格式要是物件)
-    .then(() => res.redirect('/')) // 新增完成後導回首頁
-    .catch(error => console.log(error))
-})
+// app.post('/create/new', (req, res) => {
+//   const newRestaurenat = req.body       // 從 req.body 拿出表單裡的 name 資料
+//   return listGenerated.create(newRestaurenat)     // 存入資料庫，create(這裡面的格式要是物件)
+//     .then(() => res.redirect('/')) // 新增完成後導回首頁
+//     .catch(error => console.log(error))
+// })
 // 刪除餐廳資料
-app.get('/delete/:id', (req, res) => {
-  const id = req.params.id
-  listGenerated.findById(id)
-    .then(restaurant => restaurant.remove())
-    .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
-})
+// app.get('/delete/:id', (req, res) => {
+//   const id = req.params.id
+//   listGenerated.findById(id)
+//     .then(restaurant => restaurant.remove())
+//     .then(() => res.redirect('/'))
+//     .catch(error => console.log(error))
+// })
 // 進入update頁面
-app.get('/update/:id', (req, res) => {
-  const id = req.params.id
-  return listGenerated.findById(id)
-    .lean()
-    .then(restaurant => {
-      res.render('update', { restaurant: restaurant })
-    })
-    .catch(error => console.log(error))
-})
+// app.get('/update/:id', (req, res) => {
+//   const id = req.params.id
+//   return listGenerated.findById(id)
+//     .lean()
+//     .then(restaurant => {
+//       res.render('update', { restaurant: restaurant })
+//     })
+//     .catch(error => console.log(error))
+// })
 // 送出update頁面資料到MongoDB(修改資料)
-app.post('/update/confirm/:id', (req, res) => {
-  //取得restaurant_id
-  const id = req.params.id
-  const options = req.body
-  return listGenerated.findById(id)
-    .then((restaurant) => {
-      //對應資料，寫入資料庫
-      restaurant = Object.assign(restaurant, options)
-      return restaurant.save()
-    })
-    .then(() => res.redirect(`/update/${id}`))
-    .catch((error) => console.log(error))
-})
+// app.post('/update/confirm/:id', (req, res) => {
+//   //取得restaurant_id
+//   const id = req.params.id
+//   const options = req.body
+//   return listGenerated.findById(id)
+//     .then((restaurant) => {
+//       //對應資料，寫入資料庫
+//       restaurant = Object.assign(restaurant, options)
+//       return restaurant.save()
+//     })
+//     .then(() => res.redirect(`/update/${id}`))
+//     .catch((error) => console.log(error))
+// })
 // 排序頁面
-app.get('/sort/:sortBy/:sortOrder', (req, res) => {
-  const sortBy = req.params.sortBy
-  const sortOrder = req.params.sortOrder
-  var sortByName = ""
-  if (sortBy === "name" && sortOrder === "asc") {
-    sortByName = "A → Z"
-  } else if (sortBy === "name" && sortOrder === "desc") {
-    sortByName = "Z → A"
-  } else if (sortBy === "category") {
-    sortByName = "類別"
-  } else if (sortBy === "location") {
-    sortByName = "地區"
-  }
-  console.log(sortByName)
-  console.log(sortBy)
-  console.log(sortOrder)
-  listGenerated.find()
-    .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
-    .sort({ [sortBy]: sortOrder })
-    .then(rList /* rList是清理過後的陣列 */ => {
-      res.render('index', { restaurants: rList, sortByName: sortByName })
-    }) // 將資料傳給 index 樣板
-    .catch(error => console.error(error)) // 錯誤處理
-})
+// app.get('/sort/:sortBy/:sortOrder', (req, res) => {
+//   const sortBy = req.params.sortBy
+//   const sortOrder = req.params.sortOrder
+//   var sortByName = ""
+//   if (sortBy === "name" && sortOrder === "asc") {
+//     sortByName = "A → Z"
+//   } else if (sortBy === "name" && sortOrder === "desc") {
+//     sortByName = "Z → A"
+//   } else if (sortBy === "category") {
+//     sortByName = "類別"
+//   } else if (sortBy === "location") {
+//     sortByName = "地區"
+//   }
+//   console.log(sortByName)
+//   console.log(sortBy)
+//   console.log(sortOrder)
+//   listGenerated.find()
+//     .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
+//     .sort({ [sortBy]: sortOrder })
+//     .then(rList /* rList是清理過後的陣列 */ => {
+//       res.render('index', { restaurants: rList, sortByName: sortByName })
+//     }) // 將資料傳給 index 樣板
+//     .catch(error => console.error(error)) // 錯誤處理
+// })
 // =========== routes setting End ===========
 
 // start and listen on the Express server

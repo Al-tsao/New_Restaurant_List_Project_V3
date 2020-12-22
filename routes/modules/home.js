@@ -3,6 +3,8 @@ const express = require('express')
 const router = express.Router()
 // 載入 restaurantList.js
 const listGenerated = require('../../models/restaurantList.js')
+
+// ===========準備引入路由模組===========
 // 進入index頁面
 router.get('/', (req, res) => {
   listGenerated.find()
@@ -12,5 +14,7 @@ router.get('/', (req, res) => {
     }) // 將資料傳給 index 樣板
     .catch(error => console.error(error)) // 錯誤處理
 })
+// ===========路由模組結束===========
+
 // 匯出路由模組
 module.exports = router
